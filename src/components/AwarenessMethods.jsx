@@ -1,26 +1,38 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { 
-  FaChild, 
-  FaSchool, 
-  FaHome, 
-  FaUsers, 
-  FaExclamationTriangle, 
-  FaShieldAlt,
-  FaUserShield,
-  FaBook,
-  FaHandsHelping,
-  FaUserFriends,
-  FaLaptopHouse,
-  FaSchool as FaSchoolBuilding,
-  FaPhotoVideo,
-  FaHands,
-  FaUser,
-  FaUserCircle,
-  FaHandPaper,
-  FaCommentAlt,
-  FaEye,
-  FaBookOpen
+  FaChild, FaSchool, FaHome, FaUsers, FaExclamationTriangle, 
+  FaShieldAlt, FaUserShield, FaBook, FaHandsHelping, FaUserFriends,
+  FaLaptopHouse, FaSchool as FaSchoolBuilding, FaPhotoVideo, FaHands,
+  FaUser, FaUserCircle, FaHandPaper, FaCommentAlt, FaEye, FaBookOpen,
+  FaQuoteLeft
 } from "react-icons/fa";
+
+// Animation components
+const SectionReveal = ({ children, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.6, delay }}
+  >
+    {children}
+  </motion.div>
+);
+
+const ItemReveal = ({ children, index }) => (
+  <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{ 
+      duration: 0.5,
+      delay: index * 0.1
+    }}
+  >
+    {children}
+  </motion.div>
+);
 
 function AwarenessEducation() {
   const educationSections = [
@@ -164,65 +176,126 @@ function AwarenessEducation() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {educationSections.map((section, sectionIndex) => (
-        <div key={sectionIndex} className="mb-16 bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="flex flex-col md:flex-row">
-            {/* Image Section - Full width on mobile, half on desktop */}
-            <div className="md:w-1/2">
-              <img 
-                src={section.image} 
-                alt={section.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            
-            {/* Content Section - Full width on mobile, half on desktop */}
-            <div className="md:w-1/2 p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-6">
-                {section.icon}
-                <h2 className="text-2xl sm:text-3xl font-bold text-right">{section.title}</h2>
+        <SectionReveal key={sectionIndex} delay={sectionIndex * 0.2}>
+          <div className="mb-16 bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="flex flex-col md:flex-row">
+              {/* Image Section */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: sectionIndex * 0.2 + 0.1 }}
+                className="md:w-1/2"
+              >
+                <img 
+                  src={section.image} 
+                  alt={section.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </motion.div>
+              
+              {/* Content Section */}
+              <div className="md:w-1/2 p-6 sm:p-8">
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: sectionIndex * 0.2 + 0.2 }}
+                  className="flex items-center gap-3 mb-6"
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 15,
+                      delay: sectionIndex * 0.2 + 0.3
+                    }}
+                  >
+                    {section.icon}
+                  </motion.div>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-right">
+                    {section.title}
+                  </h2>
+                </motion.div>
+
+                {section.items && (
+                  <ol className="space-y-5 text-right text-lg">
+                    {section.items.map((item, itemIndex) => (
+                      <ItemReveal key={itemIndex} index={itemIndex}>
+                        <li className="flex flex-col gap-2">
+                          <div className="flex items-start gap-3">
+                            {item.icon && (
+                              <motion.span
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ 
+                                  type: "spring",
+                                  stiffness: 300,
+                                  damping: 15,
+                                  delay: itemIndex * 0.1 + 0.4
+                                }}
+                                className="bg-blue-100 text-blue-800 p-2 rounded-full mt-1"
+                              >
+                                {item.icon}
+                              </motion.span>
+                            )}
+                            <div className="flex-1">
+                              {item.title && (
+                                <h3 className="font-semibold text-lg text-gray-800">
+                                  {itemIndex + 1}. {item.title}
+                                </h3>
+                              )}
+                              <motion.p 
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: itemIndex * 0.1 + 0.5 }}
+                                className="text-gray-700 mt-1 leading-relaxed"
+                              >
+                                {item.content}
+                              </motion.p>
+                            </div>
+                          </div>
+                        </li>
+                      </ItemReveal>
+                    ))}
+                  </ol>
+                )}
+
+                {section.conclusion && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-6 p-4 bg-blue-50 rounded-lg text-right shadow-lg text-lg relative"
+                  >
+                    <p className="text-blue-800">{section.conclusion}</p>
+                    <FaQuoteLeft className="text-blue-600 text-2xl absolute left-5 bottom-5" />
+                  </motion.div>
+                )}
+
+                {section.note && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-6 p-4 bg-red-50 rounded-lg text-right text-lg relative"
+                  >
+                    <p className="text-red-800">{section.note}</p>
+                    <FaQuoteLeft className="text-blue-600 text-2xl absolute left-5 bottom-2" />
+                  </motion.div>
+                )}
               </div>
-
-              {section.items && (
-                <ol className="space-y-5 text-right">
-                  {section.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex flex-col gap-2">
-                      <div className="flex items-start gap-3">
-                        {item.icon && (
-                          <span className="bg-blue-100 text-blue-800 p-2 rounded-full mt-1">
-                            {item.icon}
-                          </span>
-                        )}
-                        <div className="flex-1">
-                          {item.title && (
-                            <h3 className="font-semibold text-lg text-gray-800">
-                              {itemIndex + 1}. {item.title}
-                            </h3>
-                          )}
-                          <p className="text-gray-700 mt-1 leading-relaxed">
-                            {item.content}
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              )}
-
-              {section.conclusion && (
-                <div className="mt-6 p-4 bg-blue-50 rounded-lg text-right">
-                  <p className="text-blue-800">{section.conclusion}</p>
-                </div>
-              )}
-
-              {section.note && (
-                <div className="mt-6 p-4 bg-red-50 rounded-lg text-right">
-                  <p className="text-red-800">{section.note}</p>
-                </div>
-              )}
             </div>
           </div>
-        </div>
+        </SectionReveal>
       ))}
     </div>
   );
