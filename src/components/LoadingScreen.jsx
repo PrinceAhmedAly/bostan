@@ -1,5 +1,6 @@
 import React from 'react'
 import Spinner from './Spinner'
+import { FaLeaf } from 'react-icons/fa';
 
  const LoadingScreen = () => {
   return (
@@ -10,8 +11,13 @@ import Spinner from './Spinner'
         className='w-1/3 md:w-1/4 max-w-xs mb-8'
       />
       <div className='text-center'>
-        <h2 className="text-2xl font-bold mb-2">بستان أمان</h2>
-        <h3 className="text-lg">نزرع الوعي فنحصد الأمان</h3>
+     <div className="flex items-center justify-center gap-3 mb-4">
+           <FaLeaf className="text-green-600 text-4xl" />
+           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+             بستان أمان
+           </h1>
+         </div>
+         <p className="text-xl text-green-600 mb-2">نزرع الوعي .. فنحصد الأمان</p>
 
         <p className='animate-pulse'>جاري التحميل</p>
         <Spinner />

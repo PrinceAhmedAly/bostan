@@ -1,37 +1,27 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import LoadingScreen from './components/LoadingScreen';
-import HeroSection from './components/HeroSection';
-import NavBar from './components/NavBar'
-import FirstSection from './components/FirstSection';
-import SecondSection from './components/SecondSection';
-import ThirdSection from './components/ThirdSection';
-import AwarenessMethods from './components/AwarenessMethods';
-import BodySafetyEducation from './components/BodySafetyEducation';
-import SpecialNeedsBoundaries from './components/SpecialNeedsBoundaries';
-import SpecialNeedsQA from './components/SpecialNeedsQA';
-import { SiStoryblok } from 'react-icons/si';
-import StoryOne from './components/StoryOne';
-import StoryTwo from './components/StoryTwo';
-import Ending from './components/Ending';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AboutUsPage from './Pages/AboutUsPage';
+import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
+import LoadingScreen from './components/LoadingScreen';
+import './App.css';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(true); 
+  const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      
-      setTimeout(() => setIsMounted(false), 500); 
-    }, 3000);
+      setTimeout(() => setIsMounted(false), 500);
+    }, 3000); // 3 seconds loading time
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
+      {/* Loading Screen */}
       {isMounted && (
         <div className={`
           fixed inset-0 z-50 bg-white 
@@ -42,25 +32,22 @@ function App() {
         </div>
       )}
 
-      {/* nav menu */}
-      {/* <NavBar /> */}
-      {/* hero section */}
-      {!isLoading && <HeroSection />}
-      {/* sections layout */}
-      <div>
-      <FirstSection />
-      <SecondSection />
-      <ThirdSection />
-      <AwarenessMethods />
-      <BodySafetyEducation />
-      <SpecialNeedsBoundaries />
-      <SpecialNeedsQA />
-      <StoryOne />
-      <StoryTwo />
-      <Ending />
-      <Footer />
-      </div>
-      
+      {/* Main App Content */}
+      {!isLoading && (
+        <Router>
+          <div className="flex flex-col min-h-screen">
+            
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutUsPage />} />
+              </Routes>
+            </main>
+            
+            <Footer />
+          </div>
+        </Router>
+      )}
     </>
   );
 }

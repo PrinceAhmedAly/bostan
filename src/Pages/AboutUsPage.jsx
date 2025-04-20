@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaUserMd, FaLeaf, FaShieldAlt } from "react-icons/fa";
 
-const AboutUs = () => {
+const AboutUsPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Owners data (names and placeholder images)
   const owners = [
     {
@@ -90,13 +95,13 @@ const AboutUs = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-12"
       >
-        <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="flex items-center justify-center gap-3 mb-2">
           <FaLeaf className="text-green-600 text-4xl" />
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
             بستان أمان
           </h1>
         </div>
-        <p className="text-xl text-green-600 mb-2">نزرع الوعي .. فنحصد الأمان</p>
+        <p className="text-xl text-green-600">نزرع الوعي .. فنحصد الأمان</p>
       </motion.div>
 
       {/* About Content */}
@@ -105,15 +110,16 @@ const AboutUs = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="bg-white rounded-xl shadow-lg p-6 mb-12"
+        className="bg-white rounded-xl shadow-lg px-3"
       >
-        <motion.h2 variants={itemVariants} className="text-2xl font-bold text-right mb-6">
+        <motion.h2 variants={itemVariants} className="text-2xl font-bold text-right mb-3">
           نبذة تعريفية عن الموقع
         </motion.h2>
         
-        <motion.div variants={itemVariants} className="space-y-4 text-right text-gray-700 leading-relaxed text-lg">
+        <motion.div variants={itemVariants} className="space-y-4 text-right text-gray-700 leading-relaxed text-lg mb-6 py-2">
           <p>أهلاً وسهلاً بكم</p>
-          <p>خلونا نتكلم في هذا الويب سايت عن موضوع مهم جدًا يغفل عنه للأسف كثير من أولياء الأمور أو أي شخص مسؤول عن طفل بشكل عام، وهو موضوع التوعية الجنسية.</p>
+          <p>خلونا نتكلم في هذا الويب سايت عن موضوع مهم جدًا يغفل عنه للأسف كثير من أولياء الأمور أو أي شخص مسؤول عن طفل بشكل عام، وهو موضوع <span className="text-amber-500"> التوعية الجنسية </span> .</p>
+          
           <p>خلينا متفقين أن أغلبنا كأولياء أمور أو مدرسين أو حتى أخصائيين نرفض نتكلم في الموضوع ده مع الأطفال، وأول كلمة بتيجي على اللسان: عيب، ده طفل مش هانفتح عينه على الحاجات دي، هو ها يفهم يعني إيه الكلام ده؟</p>
           <p>والحقيقة بقى أن هنا المصيبة. الطفل، من وهو صغير، لازم يعرف الأماكن المسموح لمسها والأماكن الممنوع لمسها. الحدود الشخصية. يعني إيه "عمو ده حلو ومش عاوز يؤذيني" ويعني إيه "عمو ده وحش وعاوز حاجات وحشة".</p>
           <p>لازم يفهم إنه لما تحصل حاجة من الممنوع اللي اتربى عليه، يروح يقول لماما أو بابا وما يخافش منهم.</p>
@@ -122,51 +128,45 @@ const AboutUs = () => {
           <p>والحقيقة، يا جماعة، الفكرة دي مجتش لينا من فراغ، لكنها بسبب اللي بنشوفه الأيام دي. وآخرها كانت قصة الطفلة اللي حصلت في العاشر من رمضان. وبالمناسبة، المجرم عمل كده في نهار رمضان وفي الجامع.</p>
           <p>فبصراحة، لازم نخاف جدًا على أطفالنا. الموضوع بقى خطير لدرجة إنهم بقوا يعملوا توعية عليه في وسائل الإعلام وآخرها كان مسلسل (لام) شمسية اللي حاول يخاطب الأهل ويوعيهم.</p>
           <p>في هذا الموقع، هتكون كل حاجة موجودة بالتفصيل. وأتمنى إن هذا الجهد يكون شافعًا لينا يوم القيامة عند ربنا. ونقدر نساعد ناس كتير في حماية أطفالهم في الزمن الصعب ده. وإن شاء الله، نحاول نجمع كل حاجة عن الموضوع وأتمنى لو استفدت يوما من الأيام، تدعيلنا.</p>
-          <p>بسم الله نبدأ، والله ولي التوفيق.</p>
         </motion.div>
       </motion.div>
 
-      {/* Owners Section */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mb-16"
+{/* Owners Section */}
+<motion.div 
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  className="mb-16"
+>
+  <h2 className="text-2xl font-bold text-center mb-8">فريق العمل</h2>
+  
+  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+    {owners.map((owner, index) => (
+      <motion.div
+        key={owner.id}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ 
+          duration: 0.5,
+          delay: index * 0.1
+        }}
+        className="bg-white rounded-xl shadow-md overflow-hidden"
       >
-        <h2 className="text-2xl font-bold text-center mb-8">فريق العمل</h2>
-        
-        <div className="relative overflow-hidden py-4">
-          <motion.div
-            className="flex gap-6"
-            drag="x"
-            dragConstraints={{ left: -1000, right: 100 }}
-            whileTap={{ cursor: "grabbing" }}
-          >
-            {owners.map((owner, index) => (
-              <motion.div
-                key={owner.id}
-                variants={slideVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: index * 0.1 }}
-                className="flex-shrink-0 w-64 bg-white rounded-xl shadow-md overflow-hidden"
-              >
-                <img 
-                  src={owner.image} 
-                  alt={owner.name}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4 text-center">
-                  <h3 className="text-xl font-semibold">{owner.name}</h3>
-                  <p className="text-gray-600">{owner.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+        <img 
+          src={owner.image} 
+          alt={owner.name}
+          className="w-full h-48 object-cover"
+        />
+        <div className="p-4 text-center">
+          <h3 className="text-xl font-semibold">{owner.name}</h3>
+          <p className="text-gray-600">{owner.role}</p>
         </div>
       </motion.div>
+    ))}
+  </div>
+</motion.div>
 
       {/* Doctors Section */}
       <motion.div
@@ -177,11 +177,10 @@ const AboutUs = () => {
         className="bg-blue-50 rounded-xl p-8"
       >
         <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 mb-6">
-          <FaUserMd className="text-blue-600 text-3xl" />
-          <h2 className="text-2xl font-bold">المشرفون الطبيون</h2>
+          <h2 className="text-2xl font-bold">تحت إشراف: </h2>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {doctors.map((doctor, index) => (
             <motion.div
               key={doctor.id}
@@ -199,4 +198,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default AboutUsPage;
