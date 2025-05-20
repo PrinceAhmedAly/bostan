@@ -14,10 +14,10 @@ import { FaLeaf } from 'react-icons/fa';
      <div className="flex items-center justify-center gap-3 mb-4">
            <FaLeaf className="text-green-600 text-4xl" />
            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-             بستان أمان
+              طوق نجاة
            </h1>
          </div>
-         <p className="text-xl text-green-600 mb-2">نزرع الوعي .. فنحصد الأمان</p>
+         <p className="text-xl text-green-600 mb-2">للتوعية والإرشاد الجنسي</p>
 
         <p className='animate-pulse'>جاري التحميل</p>
         <Spinner />

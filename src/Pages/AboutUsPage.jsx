@@ -98,10 +98,10 @@ const AboutUsPage = () => {
         <div className="flex items-center justify-center gap-3 mb-2">
           <FaLeaf className="text-green-600 text-4xl" />
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-            بستان أمان
+             طوق نجاة
           </h1>
         </div>
-        <p className="text-xl text-green-600">نزرع الوعي .. فنحصد الأمان</p>
+        <p className="text-xl text-green-600">للتوعية والإرشاد الجنسي</p>
       </motion.div>
 
       {/* About Content */}
