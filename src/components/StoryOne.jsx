@@ -27,7 +27,7 @@ const FadeIn = ({ children }) => (
 
 const StoryOne = () => {
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <div id="story" className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
       {/* Story Header */}
       <ScrollReveal>
         <div className="text-center mb-12">

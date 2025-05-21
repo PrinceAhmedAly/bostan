@@ -31,7 +31,7 @@ const StaggerReveal = ({ children, index }) => (
 
 function SecondSection() {
     return (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 mt-5">
+        <div id="content" className="max-w-4xl mx-auto px-4 sm:px-6 py-8 mt-5">
             <ScrollReveal>
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-right">مكونات التوعية الجنسية</h2>
             </ScrollReveal>

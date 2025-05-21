@@ -59,7 +59,7 @@ function SpecialNeedsQA() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+    <div id="faq" className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8 text-center">
         <div className="flex items-center justify-center gap-3 mb-3">
           <FaChild className="text-3xl text-blue-600" />

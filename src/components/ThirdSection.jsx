@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa";
 function ThirdSection() {
   return (
     <motion.div
+    id="awareness"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}

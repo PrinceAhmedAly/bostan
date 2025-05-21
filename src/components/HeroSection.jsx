@@ -1,15 +1,15 @@
 import React, { useState, useRef } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay, FaPause, FaLeaf, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import Navbar from "./NavBar";
 
 const Hero = () => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const iframeRef = useRef(null);
-  const youtubeVideoId = "WccJu3lAAjs?si"; // Replace with your YouTube ID
 
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
-    // YouTube iframes require postMessage to control playback
     const iframe = iframeRef.current;
     if (iframe) {
       iframe.contentWindow.postMessage(
@@ -22,43 +22,135 @@ const Hero = () => {
     }
   };
 
+  // Animation variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
+  const leaf = {
+    hidden: { rotate: -90, opacity: 0 },
+    show: { 
+      rotate: 0, 
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
+
+  const videoContainer = {
+    hidden: { scale: 0.9, opacity: 0 },
+    show: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      {/* YouTube Video Background - Full Screen */}
-      <div className="absolute inset-0 w-full h-full">
-        <iframe
-          ref={iframeRef}
-          src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&enablejsapi=1`}
-          className="w-full h-full object-cover"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Background Video"
-        />
-        {/* Video overlay */}
-        <div className="absolute inset-0 bg-black/20"></div>
-      </div>
-
-      {/* Play/Pause Button (Bottom Right) */}
-      <button
-        onClick={togglePlayPause}
-        className="absolute z-10 bottom-8 right-8 p-4 40 transition-all"
-        aria-label={isPlaying ? "Pause" : "Play"}
+    <>
+      <Navbar />
+      <motion.section 
+        initial="hidden"
+        animate="show"
+        variants={container}
+        className="relative w-full min-h-screen flex flex-col items-center justify-center gap-6 md:gap-8 px-4 py-12 md:py-16 bg-gray-100"
       >
-        {isPlaying ? (
-          <FaPause className="h-8 w-8 text-white" />
-        ) : (
-          <FaPlay className="h-8 w-8 text-white" />
-        )}
-      </button>
+        {/* Text Content */}
+        <motion.div variants={container} className="text-center space-y-4 md:space-y-6">
+          <motion.h1 variants={item} className="text-3xl md:text-5xl font-bold text-gray-800">
+            مرحبا بكم في موقع
+          </motion.h1>
+          
+          <motion.div 
+            variants={container}
+            className="flex items-center justify-center gap-3 mb-2"
+          >
+            <motion.div variants={leaf}>
+              <FaLeaf className="text-green-600 text-4xl" />
+            </motion.div>
+            <motion.h1 variants={item} className="text-4xl md:text-5xl font-bold text-gray-800">
+              طوق نجاة
+            </motion.h1>
+          </motion.div>
+          
+          <motion.p variants={item} className="text-xl text-green-600">
+            للتوعية والإرشاد الجنسي
+          </motion.p>
+          
+          <motion.p variants={item} className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            نحن موقع متخصص في التوعية والإرشاد الجنسي عن طريق عرض محتوى قيّم موجه لأكثر من فئة مثل الأطفال والأهالي و الاخصائيون.
+          </motion.p>
+        </motion.div>
 
-      {/* About Link - Bottom Left */}
-      <Link
-        to="/about"
-        className="absolute left-8 bottom-12 z-10 px-6 py-2 border border-white rounded-sm text-white hover:bg-white/10 transition duration-300"
-      >
-        من نحن؟ 
-      </Link>
-    </section>
+        {/* Buttons */}
+        <motion.div 
+          variants={container}
+          className="flex flex-col sm:flex-row gap-2"
+        >
+          <motion.div variants={item}>
+            <Link
+              to="/about"
+              className="px-6 py-2 border border-gray-600 hover:bg-gray-200 rounded-md text-gray-700 transition duration-300 text-center flex items-center justify-center gap-3"
+            >
+              اعرف أكثر
+              <FaHeart className="text-red-400"/>
+            </Link>
+          </motion.div>
+          
+          <motion.div variants={item}>
+            <button
+              onClick={togglePlayPause}
+              className="flex items-center justify-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition duration-300"
+            >
+              {isPlaying ? (
+                <>
+                  <FaPause />
+                  إيقاف الفيديو
+                </>
+              ) : (
+                <>
+                  <FaPlay />
+                  شاهد الفيديو
+                </>
+              )}
+            </button>
+          </motion.div>
+        </motion.div>
+
+        {/* Video Container */}
+        <motion.div 
+          variants={videoContainer}
+          className="w-full max-w-4xl aspect-video px-4 md:px-8 md:mt-2"
+        >
+          <iframe
+            ref={iframeRef}
+            src={`https://www.youtube.com/embed/u87uTUTJqU0?si?autoplay=0&mute=0&enablejsapi=1`}
+            className="w-full h-full rounded-lg shadow-lg"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="فيديو التوعية"
+          />
+        </motion.div>
+      </motion.section>
+    </>
   );
 };
 

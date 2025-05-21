@@ -26,7 +26,7 @@ const FadeIn = ({ children }) => (
 
 function FirstSection() {
   return (
-    <div className="mt-5 text-lg max-w-6xl mx-auto px-4">
+    <div id="about" className="mt-5 text-lg max-w-6xl mx-auto px-4">
       <ScrollReveal>
         <h2 className="text-2xl font-bold mb-6 text-right">يعني ايه التوعية الجنسية ؟!</h2>
       </ScrollReveal>

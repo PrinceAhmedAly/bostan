@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaUserMd, FaLeaf, FaShieldAlt } from "react-icons/fa";
+import { owners, doctors } from "../data/data";
 
 const AboutUsPage = () => {
 
@@ -8,46 +9,6 @@ const AboutUsPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Owners data (names and placeholder images)
-  const owners = [
-    {
-      id: 1,
-      name: "أحمد محمد",
-      role: "مؤسس الموقع",
-      image: "https://randomuser.me/api/portraits/men/32.jpg"
-    },
-    {
-      id: 2,
-      name: "سارة عبد الله",
-      role: "مطورة المحتوى",
-      image: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    {
-      id: 3,
-      name: "خالد محمود",
-      role: "مصمم واجهات",
-      image: "https://randomuser.me/api/portraits/men/75.jpg"
-    },
-    {
-      id: 4,
-      name: "نورا علي",
-      role: "أخصائية نفسية",
-      image: "https://randomuser.me/api/portraits/women/63.jpg"
-    },
-    {
-      id: 5,
-      name: "يوسف إبراهيم",
-      role: "مدير تقني",
-      image: "https://randomuser.me/api/portraits/men/81.jpg"
-    }
-  ];
-
-  // Doctors data
-  const doctors = [
-    { id: 1, name: "د. محمد عبد الرحمن", specialty: "طب نفسي أطفال" },
-    { id: 2, name: "د. هناء السيد", specialty: "أخصائية تربية خاصة" },
-    { id: 3, name: "د. وليد مصطفى", specialty: "استشاري طب أسرة" }
-  ];
 
   // Animation variants
   const containerVariants = {
@@ -73,18 +34,18 @@ const AboutUsPage = () => {
     }
   };
 
-  const slideVariants = {
-    hidden: { x: -30, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10
-      }
-    }
-  };
+  // const slideVariants = {
+  //   hidden: { x: -30, opacity: 0 },
+  //   visible: {
+  //     x: 0,
+  //     opacity: 1,
+  //     transition: {
+  //       type: "spring",
+  //       stiffness: 100,
+  //       damping: 10
+  //     }
+  //   }
+  // };
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
@@ -116,7 +77,7 @@ const AboutUsPage = () => {
           نبذة تعريفية عن الموقع
         </motion.h2>
         
-        <motion.div variants={itemVariants} className="space-y-4 text-right text-gray-700 leading-relaxed text-lg mb-6 py-2">
+        <motion.div variants={itemVariants} className="space-y-4 text-right text-gray-700 leading-relaxed text-lg mb-12 py-2">
           <p>أهلاً وسهلاً بكم</p>
           <p>خلونا نتكلم في هذا الويب سايت عن موضوع مهم جدًا يغفل عنه للأسف كثير من أولياء الأمور أو أي شخص مسؤول عن طفل بشكل عام، وهو موضوع <span className="text-amber-500"> التوعية الجنسية </span> .</p>
           
@@ -137,7 +98,7 @@ const AboutUsPage = () => {
   whileInView={{ opacity: 1 }}
   viewport={{ once: true }}
   transition={{ duration: 0.6 }}
-  className="mb-16"
+  className="mb-10"
 >
   <h2 className="text-2xl font-bold text-center mb-8">فريق العمل</h2>
   
@@ -157,11 +118,10 @@ const AboutUsPage = () => {
         <img 
           src={owner.image} 
           alt={owner.name}
-          className="w-full h-48 object-cover"
+          className="w-full h-64 object-cover"
         />
         <div className="p-4 text-center">
           <h3 className="text-xl font-semibold">{owner.name}</h3>
-          <p className="text-gray-600">{owner.role}</p>
         </div>
       </motion.div>
     ))}
@@ -189,7 +149,6 @@ const AboutUsPage = () => {
               className="bg-white p-6 rounded-lg shadow-sm text-center"
             >
               <h3 className="text-xl font-semibold text-blue-800">{doctor.name}</h3>
-              <p className="text-gray-600 mt-2">{doctor.specialty}</p>
             </motion.div>
           ))}
         </div>
