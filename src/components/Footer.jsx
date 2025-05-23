@@ -71,14 +71,15 @@ const Footer = () => {
 
       {/* Copyright and Credits */}
       <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-around items-center">
-        <div className="text-gray-400 text-sm mb-4 md:mb-0">
-          &copy; {new Date().getFullYear()} مبادرة التوعية الجنسية الآمنة. جميع
+        <div className="text-gray-400 text-sm mb-4 md:mb-0 text-center px-2 md:px-0">
+          &copy; {new Date().getFullYear()}  مبادرة التوعية الجنسية الآمنة من مجموعة مستقبل أفضل. جميع
           الحقوق محفوظة.
         </div>
         <div className="text-gray-400 text-sm flex items-center">
           <span>تصميم وتطوير</span>
-          <a href="#" className="text-blue-300 hover:text-blue-400 mx-1">
-            {" "}
+          <a href="https://www.facebook.com/ahmedhamdan.page" className="text-blue-300 hover:text-blue-400 mx-1"
+          target="_blank">
+            
             Dreamer
           </a>
           <span>بكل</span>

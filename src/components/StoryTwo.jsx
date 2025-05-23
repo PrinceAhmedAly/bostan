@@ -132,7 +132,7 @@ const StoryTwo = () => {
                 whileHover={activeSection !== 0 ? { scale: 1.05 } : {}}
                 whileTap={activeSection !== 0 ? { scale: 0.95 } : {}}
               >
-                <FaArrowLeft />
+                <FaArrowRight />
                 السابق
               </motion.button>
 
@@ -152,7 +152,7 @@ const StoryTwo = () => {
                 }
               >
                 التالي
-                <FaArrowRight />
+                <FaArrowLeft />
               </motion.button>
             </div>
           </div>
